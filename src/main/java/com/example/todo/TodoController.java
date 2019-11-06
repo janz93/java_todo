@@ -1,17 +1,27 @@
 package com.example.todo;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/todo")
 public class TodoController {
-    @GetMapping("/todos")
-    public List<String> todos() {
-        return Arrays.asList("one", "two");
+    private final TodoRepository todoRepository;
+
+    @Autowired
+    TodoController(TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
     }
+
+    @GetMapping("/todo/{id}")
+    public Todo todo(@PathVariable String id) {
+        Optional<Todo> todo = this.todoRepository.findById(id);
+        return todo.get();
+    }
+
 }
