@@ -26,4 +26,16 @@ public class Todo {
         this.body = body;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
 }
