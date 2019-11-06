@@ -19,9 +19,9 @@ public class TodoController {
     }
 
     @GetMapping("/todo/{id}")
-    public Todo todo(@PathVariable String id) {
+    public Optional<Todo> todo(@PathVariable String id) {
         Optional<Todo> todo = this.todoRepository.findById(id);
-        return todo.get();
+        return todo;
     }
 
 }
